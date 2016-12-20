@@ -2,3 +2,6 @@
 terraform.tfstate.backup
 .terragrunt
 terraform.tfvars
+env_beta/.terraform
+env_beta/.terragrunt
+env_beta/terraform.tfvars

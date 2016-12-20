@@ -1,2 +1,12 @@
 variable access_key {}
 variable secret_key {}
+variable Ext_VPC_Name {}
+variable Ext_VPC_CIDR {}
+variable Ext_Pub_CIDR_1 {}
+variable Ext_Pub_CIDR_2 {}
+variable Ext_Pri_CIDR_1 {}
+variable Ext_Pri_CIDR_2 {}
+variable Ext_PubRoute {}
+variable Ext_PriRoute {}
+variable Ext_WebApp_SecGP {}
+variable Ext_Webapp_ELB {}
