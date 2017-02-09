@@ -1,8 +1,7 @@
-
-resource "aws_security_group" "TERRVPC_WebApp_SG" {
-    name = "${var.WebApp_SecGP}"
+resource "aws_security_group" "terrvpc_webapp_sg" {
+    name = "${var.env}_${var.app}_secgp"
     description = "All web trafic to server"
-    vpc_id = "${var.Temp_vpc_id}"
+    vpc_id = "${var.vpc_id}"
     
     ingress {
       from_port = 22
@@ -23,5 +22,8 @@ resource "aws_security_group" "TERRVPC_WebApp_SG" {
       cidr_blocks = ["0.0.0.0/0"]
     
   }
-  
+  tags {
+    Name = "${var.env}_${var.app}_secgp"
+    Creator = "Terraform"
+  }
 }

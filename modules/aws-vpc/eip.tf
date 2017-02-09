@@ -1,6 +1,3 @@
-resource "aws_eip" "TERRVPC_EIP_1" {
-    vpc = true
-}
-resource "aws_eip" "TERRVPC_EIP_2" {
+resource "aws_eip" "terrvpc_eip_1" {
     vpc = true
 }

@@ -1,47 +1,49 @@
-resource "aws_route_table" "TERRVPC_PublicRoute" {
-    vpc_id = "${aws_vpc.TERRVPC.id}"
+resource "aws_route_table" "terr_vpc_publicroute" {
+    vpc_id = "${aws_vpc.terr_vpc.id}"
     tags {
-        Name = "${var.PubRoute}"
+        Name = "${var.env}_$(var.app)_publicroute"
+        Creator = "Terraform"
     }
 }
 
-resource "aws_route_table" "TERRVPC_PrivateRoute" {
-    vpc_id = "${aws_vpc.TERRVPC.id}"
+resource "aws_route_table" "terr_vpc_privateroute" {
+    vpc_id = "${aws_vpc.terr_vpc.id}"
     tags {
-        Name = "${var.PriRoute}"
+        Name = "${var.env}_$(var.app)_privateroute"
+        Creator = "Terraform"
     }
 }
 
-resource "aws_route_table_association" "TERRVPC_PubAssoc_1" {
-    subnet_id = "${aws_subnet.PublicSub_1.id}"
-    route_table_id = "${aws_route_table.TERRVPC_PublicRoute.id}"
+resource "aws_route_table_association" "terr_vpc_pubassoc_1" {
+    subnet_id = "${aws_subnet.publicsubnet_1.id}"
+    route_table_id = "${aws_route_table.terr_vpc_publicroute.id}"
 }
 
-resource "aws_route_table_association" "TERRVPC_PubAssoc_2" {
-    subnet_id = "${aws_subnet.PublicSub_2.id}"
-    route_table_id = "${aws_route_table.TERRVPC_PublicRoute.id}"
+resource "aws_route_table_association" "terr_vpc_pubassoc_2" {
+    subnet_id = "${aws_subnet.publicsubnet_2.id}"
+    route_table_id = "${aws_route_table.terr_vpc_publicroute.id}"
 }
 
-resource "aws_route_table_association" "TERRVPC_PriAssoc_1" {
-    subnet_id = "${aws_subnet.PrivateSub_1.id}"
-    route_table_id = "${aws_route_table.TERRVPC_PrivateRoute.id}"
+resource "aws_route_table_association" "terr_vpc_priassoc_1" {
+    subnet_id = "${aws_subnet.privatesubnet_1.id}"
+    route_table_id = "${aws_route_table.terr_vpc_privateroute.id}"
 }
 
-resource "aws_route_table_association" "TERRVPC_PriAssoc_2" {
-    subnet_id = "${aws_subnet.PrivateSub_2.id}"
-    route_table_id = "${aws_route_table.TERRVPC_PrivateRoute.id}"
+resource "aws_route_table_association" "terr_vpc_priassoc_2" {
+    subnet_id = "${aws_subnet.privatesubnet_2.id}"
+    route_table_id = "${aws_route_table.terr_vpc_privateroute.id}"
 }
 
-resource "aws_route" "TERRVPC_Pub_Route" {
-    route_table_id = "${aws_route_table.TERRVPC_PublicRoute.id}"
+resource "aws_route" "terrvpc_pub_route" {
+    route_table_id = "${aws_route_table.terr_vpc_publicroute.id}"
     destination_cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.TERRVPC_IGW.id}"
-    depends_on = ["aws_route_table.TERRVPC_PublicRoute"]
+    gateway_id = "${aws_internet_gateway.terrvpc_igw.id}"
+    depends_on = ["aws_route_table.terr_vpc_publicroute"]
 }
 
-resource "aws_route" "BetaVPC_Pri_Route" {
-    route_table_id = "${aws_route_table.TERRVPC_PrivateRoute.id}"
+resource "aws_route" "terrvpc_pri_route" {
+    route_table_id = "${aws_route_table.terr_vpc_privateroute.id}"
     destination_cidr_block = "0.0.0.0/0"
-    nat_gateway_id = "${aws_nat_gateway.TERRVPC_NGW_1.id}"
-    depends_on = ["aws_route_table.TERRVPC_PrivateRoute"]
+    nat_gateway_id = "${aws_nat_gateway.terrvpc_ngw_1.id}"
+    depends_on = ["aws_route_table.terr_vpc_privateroute"]
 }

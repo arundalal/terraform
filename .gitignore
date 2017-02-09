@@ -5,3 +5,10 @@ terraform.tfvars
 env_beta/.terraform
 env_beta/.terragrunt
 env_beta/terraform.tfvars
+beta_env/.terraform
+beta_env/.terragrunt
+beta_env/terraform.tfvars
+
+beta_stage/.terraform
+beta_stage/.terragrunt
+beta_stage/terraform.tfvars

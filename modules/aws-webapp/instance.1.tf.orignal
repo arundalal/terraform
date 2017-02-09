@@ -1,0 +1,48 @@
+resource "aws_instance" "TERRA_Bastion" {
+    ami = "ami-b73b63a0"
+    instance_type = "t2.micro"
+    key_name = "arun"
+    subnet_id = "${var.Temp_pubsub_id[0]}"
+    vpc_security_group_ids = ["${aws_security_group.TERRVPC_WebApp_SG.id}"]
+    associate_public_ip_address = "true"
+}
+
+resource "aws_instance" "web" {
+    count = 1
+    ami = "ami-b73b63a0"
+    instance_type = "t2.micro"
+    key_name = "arun"
+    subnet_id = "${var.Temp_prisub_id[0]}"
+    vpc_security_group_ids = ["${aws_security_group.TERRVPC_WebApp_SG.id}"]
+    provisioner "chef"  {
+        attributes_json = <<-EOF
+        {
+            "key": "value",
+            "app": {
+                "cluster1": {
+                    "nodes": [
+                        "webserver1",
+                        "webserver2"
+                    ]
+                }
+            }
+        }
+        EOF
+        environment = "${var.Temp_environment_name}"
+        run_list = ["recipe[wpblog]"]
+        node_name = "${var.Temp_environment_name}_webserver1"
+        secret_key = "${file("/home/ubuntu/workspace/workdir/chef-repo/.chef/encrypted_data_bag_secret")}"
+        server_url = "https://api.opscode.com/organizations/adalal"
+        recreate_client = true
+        user_name = "arundalal786"
+        user_key = "${file("/home/ubuntu/workspace/workdir/chef-repo/.chef/arundalal786.pem")}"
+        connection {
+        type = "ssh"
+        user = "ec2-user"
+        bastion_host = "${aws_instance.TERRA_Bastion.public_ip}"
+        bastion_port = "22"
+        private_key = "${file("/home/ubuntu/arun.pem")}"
+      }
+    
+    }
+  }

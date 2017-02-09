@@ -1,10 +1,8 @@
-variable "VPC_NAME" {
-    description = "For naming VPC while creating for diff env"
-    }
-variable VPC_CIDR {}
-variable Pub_CIDR_1 {}
-variable Pub_CIDR_2 {}
-variable Pri_CIDR_1 {}
-variable Pri_CIDR_2 {}
-variable PubRoute {}
-variable PriRoute {}
+variable env {}
+variable app {}
+variable vpc_name {}
+variable vpc_cidr {}
+variable pub_cidr_1 {}
+variable pub_cidr_2 {}
+variable pri_cidr_1 {}
+variable pri_cidr_2 {}

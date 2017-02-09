@@ -1,6 +1,5 @@
 provider "aws" {
-    access_key = "${var.access_key}"
-    secret_key = "${var.secret_key}"
+    profile = "default"
     region = "us-east-1"
 }
 module "aws-vpc" { 
@@ -22,4 +21,5 @@ module "aws_webapp" {
     Temp_pubsub_id = ["${module.aws-vpc.public_subnet_ids}"]
     Temp_prisub_id = ["${module.aws-vpc.private_subnet_ids}"]
     Temp_Webapp_elb = "${var.Ext_Webapp_ELB}"
+    Temp_environment_name = "${var.Ext_environment_name}"
 }

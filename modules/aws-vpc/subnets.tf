@@ -1,35 +1,39 @@
-resource "aws_subnet" "PublicSub_1" {
-    vpc_id = "${aws_vpc.TERRVPC.id}"
-    cidr_block = "${var.Pub_CIDR_1}"
-    availability_zone = "us-east-1b"
+resource "aws_subnet" "publicsubnet_1" {
+    vpc_id = "${aws_vpc.terr_vpc.id}"
+    cidr_block = "${var.pub_cidr_1}"
+    availability_zone = "us-east-1d"
     tags {
-        Name = "BetaVPC_PublicSub_B"
+        Name = "${var.env}_${var.app}_publicsub_d"
+        Creator = "Terraform"
     }
 }
 
-resource "aws_subnet" "PublicSub_2" {
-    vpc_id = "${aws_vpc.TERRVPC.id}"
-    cidr_block = "${var.Pub_CIDR_2}"
+resource "aws_subnet" "publicsubnet_2" {
+    vpc_id = "${aws_vpc.terr_vpc.id}"
+    cidr_block = "${var.pub_cidr_2}"
     availability_zone = "us-east-1c"
     tags {
-        Name = "BetaVPC_PublicSub_C"
+        Name = "${var.env}_${var.app}_publicsub_c"
+        Creator = "Terraform"
     }
 }
 
-resource "aws_subnet" "PrivateSub_1" {
-    vpc_id = "${aws_vpc.TERRVPC.id}"
-    cidr_block = "${var.Pri_CIDR_1}"
-    availability_zone = "us-east-1b"
+resource "aws_subnet" "privatesubnet_1" {
+    vpc_id = "${aws_vpc.terr_vpc.id}"
+    cidr_block = "${var.pri_cidr_1}"
+    availability_zone = "us-east-1d"
     tags {
-        Name = "BetaVPC_PrivateSub_B"
+        Name = "${var.env}_${var.app}_publicsub_d"
+        Creator = "Terraform"
     }
 }
 
-resource "aws_subnet" "PrivateSub_2" {
-    vpc_id = "${aws_vpc.TERRVPC.id}"
-    cidr_block = "${var.Pri_CIDR_2}"
+resource "aws_subnet" "privatesubnet_2" {
+    vpc_id = "${aws_vpc.terr_vpc.id}"
+    cidr_block = "${var.pri_cidr_2}"
     availability_zone = "us-east-1c"
     tags {
-        Name = "BetaVPC_PrivateSub_C"
+        Name = "${var.env}_${var.app}_publicsub_d"
+        Creator = "Terraform"
     }
 }

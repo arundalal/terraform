@@ -1,9 +1,10 @@
-variable WebApp_SecGP {}
-variable Temp_vpc_id {}
-variable Temp_pubsub_id {
+variable env {}
+variable app {}
+variable vpc_id {}
+variable publicsub_id {
     type = "list"
 }
-variable Temp_prisub_id {
+variable privatesub_id {
     type = "list"
 }
-variable Temp_Webapp_elb {}
+
